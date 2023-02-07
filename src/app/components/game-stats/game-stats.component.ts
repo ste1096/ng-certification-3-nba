@@ -17,9 +17,11 @@ export class GameStatsComponent implements OnDestroy{
   filteredTeams: Team[] = [];
   conferences: string[] = []
   divisions: string[] = []
+  days = [6, 12, 20]
 
   selectedConference: string = ''
   selectedDivision: string = ''
+  selectedDays = 12
 
   constructor(protected nbaService: NbaService) {
     this.subscription = nbaService.getAllTeams().subscribe((teams)=>{

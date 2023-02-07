@@ -1,7 +1,6 @@
 <div class="row">
   <div class="col-sm-11">
     <select
-      #conferenceSelect
       [(ngModel)]="selectedConference"
       (ngModelChange)="onChangeConference()"
     >
@@ -10,11 +9,7 @@
         {{ conference }} Conference
       </option>
     </select>
-    <select
-      #divisionSelect
-      [(ngModel)]="selectedDivision"
-      (ngModelChange)="onChangeDivision()"
-    >
+    <select [(ngModel)]="selectedDivision" (ngModelChange)="onChangeDivision()">
       <option selected value="">--Select a division--</option>
       <option [value]="division" *ngFor="let division of divisions">
         {{ division }} Division
@@ -29,12 +24,18 @@
       Track team
     </button>
   </div>
+  <div class="col-sm-1">
+    <select #daysSelect [(ngModel)]="selectedDays">
+      <option [value]="day" *ngFor="let day of days">{{ day }} days</option>
+    </select>
+  </div>
 </div>
 <div class="row">
   <app-team-stats
     class="col-sm-4"
     *ngFor="let team of nbaService.getTrackedTeams()"
     [team]="team"
+    [days]="selectedDays"
   >
   </app-team-stats>
 </div>

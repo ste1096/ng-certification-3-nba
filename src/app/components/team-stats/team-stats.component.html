@@ -10,8 +10,8 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
-        <p>Results of past 12 days:</p>
-        <p>
+        <p>Results of past {{ days }} days:</p>
+        <p class="marks-container">
           <mark
             class="tag"
             *ngFor="let result of stats.lastGames"

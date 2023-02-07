@@ -1,7 +1,27 @@
 <div class="row">
   <div class="col-sm-11">
+    <select
+      #conferenceSelect
+      [(ngModel)]="selectedConference"
+      (ngModelChange)="onChangeConference()"
+    >
+      <option selected value="">--Select a conference--</option>
+      <option [value]="conference" *ngFor="let conference of conferences">
+        {{ conference }} Conference
+      </option>
+    </select>
+    <select
+      #divisionSelect
+      [(ngModel)]="selectedDivision"
+      (ngModelChange)="onChangeDivision()"
+    >
+      <option selected value="">--Select a division--</option>
+      <option [value]="division" *ngFor="let division of divisions">
+        {{ division }} Division
+      </option>
+    </select>
     <select #teamSelect>
-      <option [value]="team.id" *ngFor="let team of teams$ | async">
+      <option [value]="team.id" *ngFor="let team of filteredTeams">
         {{ team.full_name }}
       </option>
     </select>

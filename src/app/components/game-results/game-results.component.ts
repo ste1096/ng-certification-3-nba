@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {NbaService} from '../nba.service';
-import {Game, Team} from '../data.models';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs'
+
+import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+
+import { Game, Team } from '../../data.models'
+import { NbaService } from '../../services/nba.service'
 
 @Component({
   selector: 'app-game-results',

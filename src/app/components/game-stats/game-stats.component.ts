@@ -2,8 +2,8 @@ import { Observable, Subscribable, Subscription, tap } from 'rxjs'
 
 import { Component, OnDestroy } from '@angular/core'
 
-import { Team } from '../data.models'
-import { NbaService } from '../nba.service'
+import { Team } from '../../data.models'
+import { NbaService } from '../../services/nba.service'
 
 @Component({
   selector: 'app-game-stats',

@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {map, Observable} from 'rxjs';
-import { format, subDays } from 'date-fns';
-import {Game, Stats, Team} from './data.models';
+import { format, subDays } from 'date-fns'
+import { map, Observable } from 'rxjs'
+
+import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+
+import { Game, Stats, Team } from '../data.models'
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
 import { format, subDays } from 'date-fns'
-import { map, Observable } from 'rxjs'
+import { BehaviorSubject, map, Observable, of } from 'rxjs'
 
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
@@ -15,6 +15,7 @@ export class NbaService {
     'X-RapidAPI-Host': 'free-nba.p.rapidapi.com'};
   private API_URL = "https://free-nba.p.rapidapi.com";
   trackedTeams: Team[] = [];
+  days$: BehaviorSubject<number> = new BehaviorSubject<number>(12)
 
   constructor(private http: HttpClient) { }
 
@@ -38,7 +39,7 @@ export class NbaService {
     );
   }
 
-  getLastResults(team: Team, numberOfDays = 12 ): Observable<Game[]> {
+  getLastResults(team: Team, numberOfDays: number): Observable<Game[]> {
     return this.http.get<{meta: any, data: Game[]}>(`${this.API_URL}/games?page=0${this.getDaysQueryString(numberOfDays)}`,
       {headers: this.headers, params: {per_page: 12, "team_ids[]": ""+team.id}}).pipe(
         map(res => res.data)

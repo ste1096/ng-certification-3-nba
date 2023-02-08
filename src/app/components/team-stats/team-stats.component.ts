@@ -1,6 +1,6 @@
-import { Observable, tap } from 'rxjs'
+import { Observable, Subscription, tap } from 'rxjs'
 
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 
 import { Game, Stats, Team } from '../../data.models'
 import { ModalDialogService } from '../../services/modal-dialog.service'
@@ -9,25 +9,32 @@ import { NbaService } from '../../services/nba.service'
 @Component({
   selector: 'app-team-stats',
   templateUrl: './team-stats.component.html',
-  styleUrls: ['./team-stats.component.css']
+  styleUrls: ['./team-stats.component.css'],
+  providers: [ModalDialogService]
 })
-export class TeamStatsComponent implements OnChanges {
+export class TeamStatsComponent implements OnInit, OnDestroy {
 
   @Input() team!: Team;
-  @Input() days!: number
+  days!: number
 
   games$!: Observable<Game[]>;
   stats!: Stats;
 
-  constructor(protected nbaService: NbaService, protected modalDialogService: ModalDialogService) { }
+  subscription?: Subscription
 
+  constructor(protected nbaService: NbaService, protected modalDialogService: ModalDialogService) {}
 
-  ngOnChanges(sc: SimpleChanges): void {
-    if(sc['days']?.currentValue){
-      this.games$ = this.nbaService.getLastResults(this.team, this.days).pipe(
+  ngOnInit() {
+    this.subscription = this.nbaService.days$.subscribe((days)=>{
+      this.days = days
+      this.games$ = this.nbaService.getLastResults(this.team, days).pipe(
         tap(games =>  this.stats = this.nbaService.getStatsFromGames(games, this.team))
       )
-    }
+    })
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe()
   }
 
   onModalCancel() {

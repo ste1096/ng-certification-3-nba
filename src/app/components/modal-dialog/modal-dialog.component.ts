@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core'
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core'
 
 import { ModalDialogService } from '../../services/modal-dialog.service'
 

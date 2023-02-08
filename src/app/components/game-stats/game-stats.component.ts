@@ -1,6 +1,6 @@
-import { Observable, Subscribable, Subscription, tap } from 'rxjs'
+import { Subscription } from 'rxjs'
 
-import { Component, OnDestroy } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 
 import { Team } from '../../data.models'
 import { NbaService } from '../../services/nba.service'
@@ -10,9 +10,9 @@ import { NbaService } from '../../services/nba.service'
   templateUrl: './game-stats.component.html',
   styleUrls: ['./game-stats.component.css']
 })
-export class GameStatsComponent implements OnDestroy{
+export class GameStatsComponent implements OnInit, OnDestroy{
 
-  subscription: Subscription
+  subscriptions: Subscription[] = []
   allTeams: Team[] = [];
   filteredTeams: Team[] = [];
   conferences: string[] = []
@@ -21,19 +21,27 @@ export class GameStatsComponent implements OnDestroy{
 
   selectedConference: string = ''
   selectedDivision: string = ''
-  selectedDays = 12
+  selectedDays!: number
 
   constructor(protected nbaService: NbaService) {
-    this.subscription = nbaService.getAllTeams().subscribe((teams)=>{
+    const sub = nbaService.getAllTeams().subscribe((teams)=>{
       this.allTeams = teams
       this.filterConferences()
       this.filterDivisions()
       this.filterTeams()
     });
+    this.subscriptions.push(sub)
+  }
+
+  ngOnInit() {
+    const sub = this.nbaService.days$.subscribe((days)=>{
+      this.selectedDays = days
+    })
+    this.subscriptions.push(sub)
   }
 
   ngOnDestroy() {
-    this.subscription?.unsubscribe()
+    this.subscriptions?.forEach((sub)=>sub?.unsubscribe())
   }
 
   trackTeam(teamId: string): void {
@@ -49,6 +57,10 @@ export class GameStatsComponent implements OnDestroy{
 
   onChangeDivision(){
     this.filterTeams()
+  }
+
+  onChangeDays(){
+    this.nbaService.days$.next(this.selectedDays)
   }
 
   private filterConferences(){

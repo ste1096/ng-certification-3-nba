@@ -1,6 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { FormsModule } from '@angular/forms'
+import { NbaService } from '@app/services'
 
-import { GameStatsComponent } from './game-stats.component';
+import { GameStatsComponent } from './game-stats.component'
 
 describe('GameStatsComponent', () => {
   let component: GameStatsComponent;
@@ -8,7 +11,9 @@ describe('GameStatsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GameStatsComponent ]
+      declarations: [ GameStatsComponent ],
+      imports: [HttpClientTestingModule, FormsModule],
+      providers: [NbaService]
     })
     .compileComponents();
 

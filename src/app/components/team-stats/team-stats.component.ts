@@ -1,16 +1,14 @@
 import { Observable, Subscription, tap } from 'rxjs'
 
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
-
-import { Game, Stats, Team } from '../../data.models'
-import { ModalDialogService } from '../../services/modal-dialog.service'
-import { NbaService } from '../../services/nba.service'
+import { Game, Stats, Team } from '@app/models'
+import { ModalService, NbaService } from '@app/services'
 
 @Component({
   selector: 'app-team-stats',
   templateUrl: './team-stats.component.html',
   styleUrls: ['./team-stats.component.css'],
-  providers: [ModalDialogService]
+  providers: [ModalService]
 })
 export class TeamStatsComponent implements OnInit, OnDestroy {
 
@@ -22,7 +20,7 @@ export class TeamStatsComponent implements OnInit, OnDestroy {
 
   subscription?: Subscription
 
-  constructor(protected nbaService: NbaService, protected modalDialogService: ModalDialogService) {}
+  constructor(protected nbaService: NbaService, protected modalService: ModalService) {}
 
   ngOnInit() {
     this.subscription = this.nbaService.days$.subscribe((days)=>{
@@ -38,12 +36,12 @@ export class TeamStatsComponent implements OnInit, OnDestroy {
   }
 
   onModalCancel() {
-    this.modalDialogService.hide()
+    this.modalService.hide()
   }
 
   onModalConfirm() {
     this.nbaService.removeTrackedTeam(this.team)
-    this.modalDialogService.hide()
+    this.modalService.hide()
   }
 
 }

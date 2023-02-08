@@ -3,8 +3,7 @@ import { BehaviorSubject, map, Observable, of } from 'rxjs'
 
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-
-import { Game, Stats, Team } from '../data.models'
+import { Game, Stats, Team } from '@app/models/data.models'
 
 @Injectable({
   providedIn: 'root'

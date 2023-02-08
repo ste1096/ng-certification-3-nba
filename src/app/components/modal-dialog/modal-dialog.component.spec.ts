@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ModalDialogService } from '../../services/modal-dialog.service'
 import { ModalDialogComponent } from './modal-dialog.component'
 
 describe('ModalDialogComponent', () => {
@@ -9,7 +8,7 @@ describe('ModalDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalDialogComponent ],
+      declarations: [ ModalDialogComponent ]
     })
     .compileComponents();
 

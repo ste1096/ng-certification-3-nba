@@ -1,6 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { RouterTestingModule } from '@angular/router/testing'
+import { NbaService } from '@app/services'
 
-import { GameResultsComponent } from './game-results.component';
+import { GameResultsComponent } from './game-results.component'
 
 describe('GameResultsComponent', () => {
   let component: GameResultsComponent;
@@ -8,7 +11,9 @@ describe('GameResultsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GameResultsComponent ]
+      declarations: [ GameResultsComponent ],
+      imports: [RouterTestingModule, HttpClientTestingModule],
+      providers: [NbaService]
     })
     .compileComponents();
 

@@ -1,9 +1,8 @@
 import { Subscription } from 'rxjs'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
-
-import { Team } from '../../data.models'
-import { NbaService } from '../../services/nba.service'
+import { Team } from '@app/models'
+import { NbaService } from '@app/services'
 
 @Component({
   selector: 'app-game-stats',
@@ -26,9 +25,8 @@ export class GameStatsComponent implements OnInit, OnDestroy{
   constructor(protected nbaService: NbaService) {
     const sub = nbaService.getAllTeams().subscribe((teams)=>{
       this.allTeams = teams
-      this.filterConferences()
-      this.filterDivisions()
-      this.filterTeams()
+      this.conferences = [...new Set(this.allTeams.map(team => team?.conference))]
+      this.onChangeConference()
     });
     this.subscriptions.push(sub)
   }
@@ -51,37 +49,28 @@ export class GameStatsComponent implements OnInit, OnDestroy{
   }
 
   onChangeConference(){
-    this.filterDivisions()
-    this.filterTeams()
+    this.filteredTeams = this.filterByConference(this.allTeams)
+    this.divisions = [...new Set(this.filteredTeams?.map(team => team?.division))]
+    if(!this.divisions.find((div)=>div===this.selectedDivision)){
+      this.selectedDivision = ''
+    }else{
+      this.filteredTeams = this.filterByDivision(this.filteredTeams)
+    }
   }
 
   onChangeDivision(){
-    this.filterTeams()
+    this.filteredTeams = this.filterByDivision(this.allTeams)
   }
 
   onChangeDays(){
     this.nbaService.days$.next(this.selectedDays)
   }
 
-  private filterConferences(){
-    this.conferences = [...new Set(this.allTeams.map(team => team?.conference))]
+  private filterByConference(teams: Team[]): Team[]{
+    return teams?.filter(({conference})=>!this.selectedConference || conference === this.selectedConference)
   }
 
-  private filterDivisions(){
-    this.divisions = [...new Set(this.allTeams
-      .filter((team)=>!this.selectedConference || team?.conference === this.selectedConference)
-      .map(team => team?.division)
-    )]
-    if(!this.divisions.find((div)=>div===this.selectedDivision)){
-      this.selectedDivision = ''
-    }
-  }
-
-  private filterTeams(){
-    this.filteredTeams = this.allTeams.filter(
-      (team)=>
-      (!this.selectedDivision || team?.division === this.selectedDivision) &&
-      (!this.selectedConference || team?.conference === this.selectedConference)
-    )
+  private filterByDivision(teams: Team[]): Team[]{
+    return teams.filter(({division})=>!this.selectedDivision || division === this.selectedDivision)
   }
 }

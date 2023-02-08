@@ -1,3 +1,11 @@
 .container-days {
   text-align: right;
 }
+
+.game-stats {
+  justify-content: space-between;
+}
+
+.container-filters > select {
+  padding: 0.6rem;
+}

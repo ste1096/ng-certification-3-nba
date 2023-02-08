@@ -1,4 +1,4 @@
-<ng-container *ngIf="modalDialogService.isOpen">
+<ng-container *ngIf="modalService.isOpen">
   <div class="overlay" (click)="onClickOut.emit()"></div>
   <div class="modal-container">
     <ng-container *ngTemplateOutlet="templateRef"> </ng-container>

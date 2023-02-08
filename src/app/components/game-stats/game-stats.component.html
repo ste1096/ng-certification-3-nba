@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-11">
+  <div class="col-md-10">
     <select
       [(ngModel)]="selectedConference"
       (ngModelChange)="onChangeConference()"
@@ -24,7 +24,7 @@
       Track team
     </button>
   </div>
-  <div class="col-sm-1">
+  <div class="col-md-2 container-days">
     <select [(ngModel)]="selectedDays" (ngModelChange)="onChangeDays()">
       <option [value]="day" *ngFor="let day of days">{{ day }} days</option>
     </select>
@@ -32,7 +32,7 @@
 </div>
 <div class="row">
   <app-team-stats
-    class="col-sm-4"
+    class="col-md-4"
     *ngFor="let team of nbaService.getTrackedTeams()"
     [team]="team"
   >

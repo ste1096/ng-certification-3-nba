@@ -1,5 +1,3 @@
-import { ModalService } from 'src/app/services'
-
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,6 +6,8 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core'
+
+import { ModalService } from '../../services'
 
 @Component({
   selector: 'app-modal-dialog',

@@ -1,8 +1,9 @@
 import { Observable, Subscription, tap } from 'rxjs'
-import { Game, Stats, Team } from 'src/app/models'
-import { ModalService, NbaService } from 'src/app/services'
 
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+
+import { Game, Stats, Team } from '../../models'
+import { ModalService, NbaService } from '../../services'
 
 @Component({
   selector: 'app-team-stats',

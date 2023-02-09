@@ -1,8 +1,9 @@
 import { Subscription } from 'rxjs'
-import { Team } from 'src/app/models'
-import { NbaService } from 'src/app/services'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
+
+import { Team } from '../../models'
+import { NbaService } from '../../services'
 
 @Component({
   selector: 'app-game-stats',

@@ -1,9 +1,10 @@
 import { format, subDays } from 'date-fns'
 import { BehaviorSubject, map, Observable, of } from 'rxjs'
-import { Game, Stats, Team } from 'src/app/models/data.models'
 
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+
+import { Game, Stats, Team } from '../../models/data.models'
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,7 @@
-import { NbaService } from 'src/app/services'
-
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
+import { NbaService } from '../../services'
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component'
 import { TeamStatsComponent } from './team-stats.component'
 

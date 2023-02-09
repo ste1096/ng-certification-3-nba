@@ -1,9 +1,8 @@
-import { NbaService } from 'src/app/services'
-
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
 
+import { NbaService } from '../../services'
 import { GameStatsComponent } from './game-stats.component'
 
 describe('GameStatsComponent', () => {

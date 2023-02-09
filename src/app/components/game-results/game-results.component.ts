@@ -1,9 +1,10 @@
 import { Observable, Subscription } from 'rxjs'
-import { Game, Team } from 'src/app/models'
-import { NbaService } from 'src/app/services'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+
+import { Game, Team } from '../../models'
+import { NbaService } from '../../services'
 
 @Component({
   selector: 'app-game-results',

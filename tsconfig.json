@@ -23,11 +23,6 @@
       "dom"
     ],
     "useDefineForClassFields": false,
-    "paths": {
-			"@app/*": [
-				"src/app/*"
-			],
-    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
